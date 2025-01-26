@@ -158,7 +158,7 @@ const styles = {
   },
   bookAuthor: {
     color: '#6c757d',
-    fontSize: '14px',
+    fontSize: '18px',
   },
   deleteButton: {
     backgroundColor: 'transparent',
