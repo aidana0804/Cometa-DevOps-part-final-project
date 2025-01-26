@@ -42,7 +42,7 @@
         build: ./frontend  # Path to the Dockerfile
         source: build
 
-    # Pull the latest Docker image if it exists
+    # Pull the latest Docker image if it ex
     - name: Pull frontend Docker image
       docker_image:
         name: aidana0804/lib-app:latest
