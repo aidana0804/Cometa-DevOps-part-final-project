@@ -1,0 +1,42 @@
+name: Deploy Application via Ansible
+
+on:
+  push:
+    branches:
+      - main  # Run this workflow only on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # Set this in GitHub Secrets
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Set this in GitHub Secrets
+
+      # Step 3: Build the Docker image
+      - name: Build Docker image
+        run: docker build -t aidana0804/lib-app:${{ github.sha }} .
+
+      # Step 4: Push Docker image to Docker Hub
+      - name: Push Docker image
+        run: docker push aidana0804/lib-app:${{ github.sha }}
+
+      # Step 5: Run the Ansible playbook
+      - name: Run Ansible playbook
+        uses: docker://cytopia/ansible:latest
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        with:
+          args: |
+            ansible-playbook \
+              -i inventory.yml \
+              ansible_final_playbook.yml \
+              -e "image_version=${{ github.sha }}"
