@@ -35,19 +35,17 @@
         name: docker
         executable: pip3
 
-    # Build the image if it doesn't exist
-    - name: Build frontend Docker image if not present
-      docker_image:
-        name: aidana0804/lib-app:latest
-        build: ./frontend  # Path to the Dockerfile
-        source: build
-
-    # Pull the latest Docker image if it ex
-    - name: Pull frontend Docker image
+    - name: Pull the latest frontend Docker image
       docker_image:
         name: aidana0804/lib-app:latest
         source: pull
-        force_pull: yes
+
+    - name: Stop and remove the existing container if running
+      shell: |
+        if [ $(docker ps -q -f name=frontend) ]; then
+          docker stop frontend && docker rm frontend
+        fi
+      ignore_errors: true
 
     - name: Run the frontend container
       docker_container:
@@ -56,7 +54,7 @@
         state: started
         restart_policy: always
         ports:
-          - "3000:3000"  # Map port 3000 of the container to port 3000 on the host
+          - "3000:3000"
 
 
 
