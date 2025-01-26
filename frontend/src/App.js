@@ -85,7 +85,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    backgroundColor: '#f0f4f8',
+    backgroundColor: '#f0f4ii',
     fontFamily: "'Inter', sans-serif",
   },
   card: {
@@ -118,7 +118,7 @@ const styles = {
   input: {
     padding: '12px',
     borderRadius: '8px',
-    border: '1px solid #dee2e6',
+    border: '1px solidrgb(92, 142, 193)',
     fontSize: '14px',
     transition: 'all 0.3s ease',
   },
@@ -143,7 +143,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#f8f9fa',
-    padding: '18px',
+    padding: '25px',
     borderRadius: '8px',
     marginBottom: '10px',
     transition: 'background-color 0.3s ease',
@@ -157,7 +157,7 @@ const styles = {
     color: '#007bff',
   },
   bookAuthor: {
-    color: '#6c757d',
+    color: 'navy',
     fontSize: '18px',
   },
   deleteButton: {
