@@ -35,17 +35,80 @@
         name: docker
         executable: pip3
 
+    # Build the image if it doesn't exist
+    - name: Build frontend Docker image if not present
+      docker_image:
+        name: aidana0804/lib-app:latest
+        build: ./frontend  # Path to the Dockerfile
+        source: build
 
+    # Pull the latest Docker image if it exists
     - name: Pull frontend Docker image
       docker_image:
-        name: aidana0804/lib-app:v1
+        name: aidana0804/lib-app:latest
         source: pull
+        force_pull: yes
 
     - name: Run the frontend container
       docker_container:
         name: frontend
-        image: aidana0804/lib-app:v1
+        image: aidana0804/lib-app:latest
         state: started
         restart_policy: always
         ports:
-          - "3000:3000" 
+          - "3000:3000"  # Map port 3000 of the container to port 3000 on the host
+
+
+
+
+# - name: Set up Docker environment and deploy frontend application
+#   hosts: ec2_servers
+#   become: true
+#   tasks:
+#     - name: Update package manager cache
+#       dnf:
+#         update_cache: true
+
+#     - name: Install required packages
+#       dnf:
+#         name:
+#           - yum-utils
+#           - device-mapper-persistent-data
+#           - lvm2
+#         state: present
+
+#     - name: Install Docker
+#       dnf:
+#         name: docker
+#         state: present
+
+#     - name: Ensure Docker service is running and enabled
+#       service:
+#         name: docker
+#         state: started
+#         enabled: true
+
+#     - name: Ensure pip3 is installed
+#       dnf:
+#         name: python3-pip
+#         state: present
+
+#     - name: Install Docker SDK for Python
+#       pip:
+#         name: docker
+#         executable: pip3
+
+
+#     - name: Pull frontend Docker image
+#       docker_image:
+#         name: aidana0804/lib-app:v1
+#         source: pull
+
+#     - name: Run the frontend container
+#       docker_container:
+#         name: frontend
+#         image: aidana0804/lib-app:v1
+#         state: started
+#         restart_policy: always
+#         ports:
+#           - "3000:3000" 
