@@ -106,7 +106,7 @@ const styles = {
   subHeader: {
     textAlign: 'center',
     color: '#007bff',
-    marginTop: '30px',
+    marginTop: '31px',
     marginBottom: '15px',
     fontSize: '18px',
   },
