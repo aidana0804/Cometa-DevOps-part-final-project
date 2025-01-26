@@ -143,7 +143,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#f8f9fa',
-    padding: '15px',
+    padding: '18px',
     borderRadius: '8px',
     marginBottom: '10px',
     transition: 'background-color 0.3s ease',
